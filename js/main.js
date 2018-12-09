@@ -40,7 +40,7 @@ function createWindow () {
                                     plugins: true
                                     }
                                 });
-    window.webContents.openDevTools()
+//    window.webContents.openDevTools()
 //    window.loadURL(url.format({
 //        pathname: path.join(__dirname, '..', 'image', 'youtube.jpg'),
 //        protocol: 'file:',
