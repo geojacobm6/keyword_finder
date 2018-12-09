@@ -21,14 +21,18 @@ app.on('window-all-closed', () => {
     }
   })
 
+//app.on('quit', function() {
+//    PythonShell.end(function (err,code,signal) {
+//      if (err) throw err;
+//      console.log('The exit code was: ' + code);
+//      console.log('The exit signal was: ' + signal);
+//      console.log('finished');
+//      console.log('finished');
+//    });
+//});
 
 function createWindow () {
 
-//    window.loadURL(url.format({
-//        pathname: path.join(__dirname, '..', 'backend', 'templates', 'index.html'),
-//        protocol: 'file:',
-//        slashes: true
-//      }));
     PythonShell.run('./backend/engine.py',  function  (err, results)  {
      if  (err)  console.log(err);
     });
@@ -41,21 +45,12 @@ function createWindow () {
                                     }
                                 });
 //    window.webContents.openDevTools()
-//    window.loadURL(url.format({
-//        pathname: path.join(__dirname, '..', 'image', 'youtube.jpg'),
-//        protocol: 'file:',
-//        slashes: true
-//    }));
+
     window.loadURL(url.format({
         pathname: path.join(__dirname, '..', 'backend', 'templates', 'starter.html'),
         protocol: 'file:',
         slashes: true
     }));
-
-//    setTimeout(function() {
-//        window.loadURL("http://127.0.0.1:5000/");
-//    }, 7000);
-
  }
 
 ipcMain.on('search-keyword-event', function(event, title) {

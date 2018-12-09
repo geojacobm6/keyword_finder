@@ -1,6 +1,7 @@
 import os
 import sys
-from flask import Flask, render_template, send_from_directory
+from flask import Flask, render_template,\
+    send_from_directory, request
 
 from finder import KeywordFinder
 
@@ -8,9 +9,19 @@ from finder import KeywordFinder
 app = Flask(__name__, template_folder='templates', static_folder='assets')
 
 
-@app.route("/")
+@app.route("/", methods=['POST', 'GET'])
 def home():
-    return render_template('index.html')
+    if request.method == 'POST':
+        search = request.form['search']
+        keyword_object = KeywordFinder()
+        keyword_object.find_links(search)
+        return render_template('index.html',
+                               tags=keyword_object.TAG_LIST,
+                               count=len(list(keyword_object.TAG_LIST)),
+                               trending=int(len(list(keyword_object.TAG_LIST))/2))
+    else:
+        return render_template('starter.html')
+
 
 @app.route('/assets/<path:folder>/<path:path>')
 def send_assets(folder, path):
