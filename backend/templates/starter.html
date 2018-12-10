@@ -62,12 +62,18 @@
                 <br>
                 <div id="loader" class="col-md-10" style="display: none"><div class="offset-md-6 loader"></div></div>
                 <div id="login-form" class="login-form">
-                    <form action="http://127.0.0.1:5000/" method="post">
+                    <form id="searchForm" action="" method="post">
                         <div class="form-group">
                             <input name="search" placeholder="Enter the Title" type="text" class="form-control" aria-required="true">
                         </div>
                         <button type="submit" class="btn btn-success btn-flat m-b-30 m-t-30" id="searchBtn">Start Finder</button>
                     </form>
+                    <script>
+                        const { ipcRenderer, remote } = require( "electron" );
+                        var port = remote.getGlobal("port");
+                        var full_path = 'http://0.0.0.0:' + port;
+                        document.getElementById("searchForm").action = full_path;
+                    </script>
                 </div>
             </div>
         </div>
@@ -75,6 +81,7 @@
 
     <script>window.$ = window.jQuery = require('jquery');</script>
     <script src="../assets/js/common.js"></script>
+
 
 </body>
 </html>

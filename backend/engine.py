@@ -5,6 +5,7 @@ from flask import Flask, render_template,\
 
 from finder import KeywordFinder
 
+global port
 
 app = Flask(__name__, template_folder='templates', static_folder='assets')
 
@@ -18,18 +19,18 @@ def home():
         return render_template('index.html',
                                tags=keyword_object.TAG_LIST,
                                count=len(list(keyword_object.TAG_LIST)),
-                               trending=int(len(list(keyword_object.TAG_LIST))/2))
+                               trending=int(len(list(keyword_object.TAG_LIST))/2),
+                               port=port)
     else:
-        return render_template('starter.html')
+        return render_template('starter.html', port=port)
 
 
 @app.route('/assets/<path:folder>/<path:path>')
 def send_assets(folder, path):
-    print(app.static_folder, 'css', path)
     full_directory = os.path.join(app.static_folder, folder)
-    print(full_directory)
     return send_from_directory(full_directory, path)
 
 
 if __name__ == "__main__":
-    app.run(host='127.0.0.1', port=5000)
+    port = sys.argv[1]
+    app.run(host='0.0.0.0', port=port)
