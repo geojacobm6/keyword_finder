@@ -1,5 +1,5 @@
 {
-  "name": "keyword",
+  "name": "keyword_finder",
   "version": "1.0.0",
   "description": "",
   "main": "js/main.js",
@@ -11,7 +11,8 @@
   "author": "Geo Jacob",
   "license": "ISC",
   "devDependencies": {
-    "electron": "^3.0.10"
+    "electron": "^3.0.10",
+    "electron-packager": "^13.0.0"
   },
   "dependencies": {
     "get-port": "^4.0.0",
