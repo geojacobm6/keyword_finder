@@ -127,16 +127,16 @@
                                                 <tr>
                                                     <th class="serial">#</th>
                                                     <th class="text-center">Name</th>
-                                                    <!--<th>Count</th>-->
+                                                    <th>Count</th>
                                                     <!--<th>Status</th>-->
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                {% for tag in tags %}
+                                                {% for tag, count in tags.items() %}
                                                 <tr>
                                                     <td class="serial">{{ loop.index }}</td>
                                                     <td class="text-center">  <span class="name">{{ tag }}</span> </td>
-                                                    <!--<td><span class="count">231</span></td>-->
+                                                    <td><span class="count">{{ count }}</span></td>
                                                     <!--<td>-->
                                                         <!--<span class="badge badge-complete">Complete</span>-->
                                                     <!--</td>-->

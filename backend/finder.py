@@ -7,6 +7,9 @@ from youtube import YoutubeTags
 class KeywordFinder(object):
     EXTRACTED_LINKS = set()
     TAG_LIST = set()
+    TAG_DICT = dict()
+    CURRENT_TRENDING = ""
+    CURRENT_TRENDING_COUNT = 0
 
     def get_html(self):
         html = """
@@ -30,17 +33,21 @@ class KeywordFinder(object):
     def get_tags(self, link):
         for tag in YoutubeTags().get_tags(link):
             self.TAG_LIST.add(tag)
+            if self.TAG_DICT.get(tag):
+                self.TAG_DICT[tag] += 1
+            else:
+                self.TAG_DICT[tag] = 1
+            if not self.CURRENT_TRENDING or self.CURRENT_TRENDING != tag:
+                if self.TAG_DICT[tag] > self.CURRENT_TRENDING_COUNT:
+                    self.CURRENT_TRENDING = tag
+                    self.CURRENT_TRENDING_COUNT = self.TAG_DICT[tag]
+            else:
+                self.CURRENT_TRENDING = tag
+                self.CURRENT_TRENDING_COUNT = self.TAG_DICT[tag]
+
 
     def find_links(self, title):
         for link in GoogleScrap().get_youtube_links(title):
             if link not in self.EXTRACTED_LINKS:
                 self.EXTRACTED_LINKS.add(link)
                 self.get_tags(link)
-
-
-
-# if __name__ == '__main__':
-#     keyword_object = KeywordFinder()
-#     keyword_object.find_links(sys.argv[1])
-#     keyword_object.get_html()
-#     sys.stdout.flush()

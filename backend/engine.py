@@ -22,9 +22,9 @@ def home():
         keyword_object = KeywordFinder()
         keyword_object.find_links(search)
         return render_template('index.html',
-                               tags=keyword_object.TAG_LIST,
+                               tags=keyword_object.TAG_DICT,
                                count=len(list(keyword_object.TAG_LIST)),
-                               trending=int(len(list(keyword_object.TAG_LIST))/2),
+                               trending=keyword_object.CURRENT_TRENDING,
                                port=port)
     else:
         return render_template('starter.html', port=port)

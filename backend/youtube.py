@@ -1,8 +1,3 @@
-import re
-import urllib
-import requests
-
-from bs4 import BeautifulSoup
 from base import KeywordBase
 
 
