@@ -19,7 +19,8 @@
     "electron": "^3.0.10",
     "electron-installer-debian": "^1.0.1",
     "electron-installer-dmg": "^2.0.0",
-    "electron-packager": "^13.0.0"
+    "electron-packager": "^13.0.0",
+    "electron-winstaller": "^2.7.0"
   },
   "dependencies": {
     "get-port": "^4.0.0",
