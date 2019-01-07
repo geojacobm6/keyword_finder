@@ -13,11 +13,11 @@ function getInstallerConfig () {
   const rootPath = path.join('./')
   const outPath = path.join(rootPath, 'release-builds')
   return Promise.resolve({
-    appDirectory: path.join(outPath, 'Keyword-finder-app-win32-ia32/'),
+    appDirectory: path.join(outPath, 'keywordfinder-win32-ia32/'),
     authors: 'Geo Jacob',
     noMsi: true,
     outputDirectory: path.join(outPath, 'windows-installer'),
-    exe: 'keyword-finder-app.exe',
+    exe: 'keywordfinderapp.exe',
     setupExe: 'KeywordFinderAppInstaller.exe',
     setupIcon: path.join(rootPath, 'assets', 'icons', 'win', 'icon.ico')
   })
