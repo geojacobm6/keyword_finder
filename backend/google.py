@@ -13,7 +13,7 @@ class GoogleScrap(KeywordBase):
 
     def get_soup_with_title(self, title):
         link = "{}?{}".format(self.GOOGLE_LINK, urllib.parse.urlencode(
-            {"q": "{}+youtube".format(title)}
+            {"q": "{} {}".format(title, "youtube")}
         ))
         return self.get_soup(link)
 

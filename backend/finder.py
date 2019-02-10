@@ -1,6 +1,7 @@
 import sys
 
 from google import GoogleScrap
+from bing import BingScrap
 from youtube import YoutubeTags
 
 
@@ -45,9 +46,18 @@ class KeywordFinder(object):
                 self.CURRENT_TRENDING = tag
                 self.CURRENT_TRENDING_COUNT = self.TAG_DICT[tag]
 
-
     def find_links(self, title):
+        self.EXTRACTED_LINKS = set()
+        self.TAG_LIST = set()
+        self.TAG_DICT = dict()
+        self.CURRENT_TRENDING = ""
+        self.CURRENT_TRENDING_COUNT = 0
         for link in GoogleScrap().get_youtube_links(title):
+            if link not in self.EXTRACTED_LINKS:
+                self.EXTRACTED_LINKS.add(link)
+                self.get_tags(link)
+
+        for link in BingScrap().get_youtube_links(title):
             if link not in self.EXTRACTED_LINKS:
                 self.EXTRACTED_LINKS.add(link)
                 self.get_tags(link)
