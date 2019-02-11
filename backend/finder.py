@@ -2,6 +2,7 @@ import sys
 
 from google import GoogleScrap
 from bing import BingScrap
+from duckduckgo import DuckDuckGoScrap
 from youtube import YoutubeTags
 
 
@@ -58,6 +59,11 @@ class KeywordFinder(object):
                 self.get_tags(link)
 
         for link in BingScrap().get_youtube_links(title):
+            if link not in self.EXTRACTED_LINKS:
+                self.EXTRACTED_LINKS.add(link)
+                self.get_tags(link)
+
+        for link in DuckDuckGoScrap().get_youtube_links(title):
             if link not in self.EXTRACTED_LINKS:
                 self.EXTRACTED_LINKS.add(link)
                 self.get_tags(link)
