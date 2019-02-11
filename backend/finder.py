@@ -1,5 +1,3 @@
-import sys
-
 from google import GoogleScrap
 from bing import BingScrap
 from duckduckgo import DuckDuckGoScrap
@@ -7,32 +5,20 @@ from youtube import YoutubeTags
 
 
 class KeywordFinder(object):
-    EXTRACTED_LINKS = set()
-    TAG_LIST = set()
-    TAG_DICT = dict()
-    CURRENT_TRENDING = ""
-    CURRENT_TRENDING_COUNT = 0
 
-    def get_html(self):
-        html = """
-                <!DOCTYPE html>
-                  <html>
-                    <head>
-                      <meta charset="UTF-8">
-                      <title>Keyword Finder</title>
-                    </head>
-                    <body>
-                      <h1>Results</h1>
-                        {}
-                    </body>
-                  </html>
-                """
-        html_span = ''
-        for tag in self.TAG_LIST:
-            html_span += "<strong>{}</strong>, ".format(tag)
-        print(html.format(html_span))
+    def __init__(self):
+        self.EXTRACTED_LINKS = set()
+        self.TAG_LIST = set()
+        self.TAG_DICT = dict()
+        self.CURRENT_TRENDING = ""
+        self.CURRENT_TRENDING_COUNT = 0
 
     def get_tags(self, link):
+        """
+        Get tags for youtube watch link
+        :param link: https://www.youtube.com/watch?v=m49lM921
+        :return:
+        """
         for tag in YoutubeTags().get_tags(link):
             self.TAG_LIST.add(tag)
             if self.TAG_DICT.get(tag):
@@ -48,11 +34,12 @@ class KeywordFinder(object):
                 self.CURRENT_TRENDING_COUNT = self.TAG_DICT[tag]
 
     def find_links(self, title):
-        self.EXTRACTED_LINKS = set()
-        self.TAG_LIST = set()
-        self.TAG_DICT = dict()
-        self.CURRENT_TRENDING = ""
-        self.CURRENT_TRENDING_COUNT = 0
+        """
+        Get youtube links and the keywords used for given title
+         by searching on different search engines
+        :param title: Sample title
+        :return:
+        """
         for link in GoogleScrap().get_youtube_links(title):
             if link not in self.EXTRACTED_LINKS:
                 self.EXTRACTED_LINKS.add(link)

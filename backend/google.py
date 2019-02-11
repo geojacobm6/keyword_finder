@@ -1,7 +1,4 @@
 import urllib
-import requests
-
-from bs4 import BeautifulSoup
 
 from constants import YOUTUBE_WATCH_LINK
 from base import KeywordBase
@@ -12,12 +9,20 @@ class GoogleScrap(KeywordBase):
     EXTRACTED_LINKS = set()
 
     def get_soup_with_title(self, title):
+        """
+        :param title: Sample title
+        :return: soup object for search result page
+        """
         link = "{}?{}".format(self.GOOGLE_LINK, urllib.parse.urlencode(
             {"q": "{} {}".format(title, "youtube")}
         ))
         return self.get_soup(link)
 
     def get_youtube_links(self, title):
+        """
+        :param title: Sample title
+        :return: scrap Youtube link from search result page
+        """
         soup = self.get_soup_with_title(title)
         links = soup.find_all('div', class_='r')
         for link in links:
