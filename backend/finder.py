@@ -33,6 +33,33 @@ class KeywordFinder(object):
                 self.CURRENT_TRENDING = tag
                 self.CURRENT_TRENDING_COUNT = self.TAG_DICT[tag]
 
+    def get_google_links(self, title):
+        """
+        Updates keywords from google
+        """
+        for link in GoogleScrap().get_youtube_links(title):
+            if link not in self.EXTRACTED_LINKS:
+                self.EXTRACTED_LINKS.add(link)
+                self.get_tags(link)
+
+    def get_bing_links(self, title):
+        """
+        Updates keywords from Bing
+        """
+        for link in BingScrap().get_youtube_links(title):
+            if link not in self.EXTRACTED_LINKS:
+                self.EXTRACTED_LINKS.add(link)
+                self.get_tags(link)
+
+    def get_duckduckgo_links(self, title):
+        """
+        Updates keywords from duckduckgo
+        """
+        for link in DuckDuckGoScrap().get_youtube_links(title):
+            if link not in self.EXTRACTED_LINKS:
+                self.EXTRACTED_LINKS.add(link)
+                self.get_tags(link)
+
     def find_links(self, title):
         """
         Get youtube links and the keywords used for given title
@@ -40,17 +67,6 @@ class KeywordFinder(object):
         :param title: Sample title
         :return:
         """
-        for link in GoogleScrap().get_youtube_links(title):
-            if link not in self.EXTRACTED_LINKS:
-                self.EXTRACTED_LINKS.add(link)
-                self.get_tags(link)
-
-        for link in BingScrap().get_youtube_links(title):
-            if link not in self.EXTRACTED_LINKS:
-                self.EXTRACTED_LINKS.add(link)
-                self.get_tags(link)
-
-        for link in DuckDuckGoScrap().get_youtube_links(title):
-            if link not in self.EXTRACTED_LINKS:
-                self.EXTRACTED_LINKS.add(link)
-                self.get_tags(link)
+        self.get_google_links(title)
+        self.get_bing_links(title)
+        self.get_duckduckgo_links(title)
