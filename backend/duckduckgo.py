@@ -20,7 +20,7 @@ class DuckDuckGoScrap(KeywordBase):
 
     def get_youtube_links(self, title):
         """
-        :param title: Sample title
+        :param title: Sample title 
         :return: scrap Youtube link from search result page
         """
         soup = self.get_soup_with_title(title)
