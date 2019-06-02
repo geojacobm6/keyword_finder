@@ -5,7 +5,7 @@ from base import KeywordBase
 
 
 class GoogleScrap(KeywordBase):
-    GOOGLE_LINK = "https://www.google.com/search"
+    WEB_LINK = "https://www.google.com/search"
     EXTRACTED_LINKS = set()
 
     def get_soup_with_title(self, title):
@@ -13,7 +13,7 @@ class GoogleScrap(KeywordBase):
         :param title: Sample title
         :return: soup object for search result page
         """
-        link = "{}?{}".format(self.GOOGLE_LINK, urllib.parse.urlencode(
+        link = "{}?{}".format(self.WEB_LINK, urllib.parse.urlencode(
             {"q": "{} {}".format(title, "youtube")}
         ))
         return self.get_soup(link)
