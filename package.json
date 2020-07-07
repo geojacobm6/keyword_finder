@@ -16,7 +16,7 @@
   "author": "Geo Jacob",
   "license": "ISC",
   "devDependencies": {
-    "electron": "^3.1.13",
+    "electron": "^7.2.4",
     "electron-installer-debian": "^1.2.0",
     "electron-installer-dmg": "^2.0.0",
     "electron-packager": "^13.1.1",
