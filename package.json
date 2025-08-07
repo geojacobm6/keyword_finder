@@ -17,9 +17,9 @@
   "license": "ISC",
   "devDependencies": {
     "electron": "^22.3.25",
-    "electron-installer-debian": "^1.2.0",
+    "electron-installer-debian": "^3.2.0",
     "electron-installer-dmg": "^2.0.0",
-    "electron-packager": "^13.1.1",
+    "electron-packager": "^17.1.2",
     "electron-winstaller": "^2.7.0"
   },
   "dependencies": {
